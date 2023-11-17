@@ -1,5 +1,6 @@
 
 import Header from '../components/Header';
+import Perfil from './Perfil';
 
 const Home = () => {
     return (
@@ -50,6 +51,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+            <Perfil></Perfil>
         </div>
     )
 }

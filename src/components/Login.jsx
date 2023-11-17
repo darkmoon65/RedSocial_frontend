@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-
+import { Link } from "react-router-dom";
+import LoginWithGoogle from './LoginGoogle';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -47,6 +48,18 @@ const Login = () => {
     cursor: "pointer",     
 
   }
+  const botonRegistroFirst = {
+    background : " #00307a ",
+    borderRadius: "20px", 
+    color: "white",
+    margin: "10px",
+    border: "none",
+    height:"25px",
+    cursor: "pointer",
+    paddingLeft: "15px",
+    paddingRight: "15px",
+    width: "100%"
+  }
 
   const formulario ={ 
     color: "#00307a",
@@ -71,33 +84,32 @@ const Login = () => {
     <div style = {fondo}>
         <div>
             <img href="#" style={logo} src={process.env.PUBLIC_URL + '/imagenes/logo_OS.jpg'} alt="Descripción de la imagen" />
-                <form style={formulario}>
-                    <div   >
-                        <label style={boxInputEmail}>Email:</label>
-                        <input style={boxInput}
-                            type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </div>
-                    <div >
-                        <label>Password:</label>
-                        <input style={boxInput}
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div>
-                    <button style = {botonIniciarSesion}  type="button" onClick={handleLogin}>
-                        Iniciar sesión
-                    </button>  
+            <form style={formulario}>
+                <div   >
+                    <label style={boxInputEmail}>Email:</label>
+                    <input style={boxInput}
+                        type="text"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+                <div >
+                    <label>Password:</label>
+                    <input style={boxInput}
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                <button style = {botonIniciarSesion}  type="button" onClick={handleLogin}>
+                    Iniciar sesión
+                </button>  
             </form>
-                <button style = {botonRegistro}  type="button" onClick={handleLogin}>
-                    Registrarse
-                </button>
-                <button style = {botonRegistro}  type="button" onClick={handleLogin}>
-                    Registrarse con Google
-                </button>
+            <LoginWithGoogle/>
+            <Link style={botonRegistroFirst} to="/register"> Registrarse </Link>
+            <button style = {botonRegistro}  type="button" onClick={handleLogin}>
+                Registrarse con Google
+            </button>
         </div>
     </div>
   );

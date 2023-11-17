@@ -46,7 +46,7 @@ const imagen ={ width: '100%', objectFit: 'cover' , height:"100vh" }
 const margen ={ marginBottom:"20px"  }
 
 
-const Registro= () => {
+const Registro = () => {
   return (
     <div style={general}>
       <div style={cardGeneral}>

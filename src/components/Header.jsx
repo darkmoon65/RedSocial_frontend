@@ -52,7 +52,7 @@ const Header = () => {
         </div>
 
         <div className='col-6'  style={buscadorContainer}>
-          <input  className='form-control' style={{width : '100%'}} type="text" placeholder="Buscar..." />      
+          <input  className='form-control' style={{width : '100%'}} type="text" placeholder="Busca a personas o grupos que conoces" />      
         </div>
         
         <div className='col-4 justify-content-end pe-5' style={iconosContainer}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { Link } from "react-router-dom";
 
 const Header = () => { 
   const logo = {
@@ -44,7 +45,10 @@ const Header = () => {
     <div >
       <div className='row' style={fondo}> 
         <div className='col-4' >
-            <img href="#" style={logo} src={process.env.PUBLIC_URL + '/imagenes/large.png'} alt="logo only students navbar" />
+          <Link to="/">
+            <img href="#" style={logo} src={process.env.PUBLIC_URL + '/imagenes/large.png'} alt="logo only students navbar" />   
+          </Link>
+            
         </div>
 
         <div className='col-6'  style={buscadorContainer}>
@@ -55,7 +59,7 @@ const Header = () => {
           <FontAwesomeIcon icon={faBell} style={endPart} />  
           <div style={cerrarSesionContainer}>
             <FontAwesomeIcon icon={faSignOutAlt} style={endPart} />
-            <span style={cerrarSesionTexto}>Cerrar Sesión</span>
+            <Link to="/login" style={{textDecoration: 'none', color: 'white'}}><span style={cerrarSesionTexto}>Cerrar Sesión</span></Link>
           </div>
         </div>
       </div>

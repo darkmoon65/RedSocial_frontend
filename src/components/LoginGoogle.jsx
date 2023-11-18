@@ -9,6 +9,8 @@ const LoginWithGoogle = () => {
     let decoded = jwtDecode(user?.credential);
     console.log(decoded)
 
+    window.location.href = 'http://localhost:3000/';
+
   };
 
   const handleFailure = (error) => {
@@ -16,7 +18,7 @@ const LoginWithGoogle = () => {
   };
 
   return (
-    <div>
+    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
      <GoogleOAuthProvider clientId="576036305257-n6rpfq45qeaeqshno3mjt9dv1djl6vfl.apps.googleusercontent.com">
         <GoogleLogin
             onSuccess={handleSuccess}

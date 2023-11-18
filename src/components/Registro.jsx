@@ -1,5 +1,6 @@
 import React from 'react';
- 
+import { Link } from "react-router-dom";
+
 const botonRegistrarse = {
   background : " #00307a ",
   width:"50%", 
@@ -10,6 +11,8 @@ const botonRegistrarse = {
   cursor: "pointer",     
   textAlign: 'center',
   justifyContent: 'center',
+  textDecoration: 'none',
+  padding: '10px'
 }
  
 
@@ -93,7 +96,7 @@ const Registro = () => {
            </div>
           </form>
           <div style={{textAlign: 'center', }}>
-             <button style={botonRegistrarse}  type="submit">Registrarse</button>
+            <Link style={botonRegistrarse} to="/login"> Registrarse </Link>
 
           </div>
         </div>

@@ -5,9 +5,27 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     console.log('Email:', email);
     console.log('Password:', password);
+
+    try{
+      var rpta = await fetch("http://localhost:3200/auth/login", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify ({"correo": email, "contrasena": password})
+      });
+      var token = await rpta.json();
+      console.log(token);
+      
+    }catch(err){
+      console.log(err)
+    }
+
+
   };
 
   const logo = {

@@ -81,11 +81,7 @@ const Perfil = () => {
     width : "100%",
     height : "100%",
     cursor: "pointer",  
-  }
-  const iconoDivierte = {
-    color: "#FFC107",
-    fontSize: "25px",
-  }
+  }  
    
   const iconoEncanta = {
     color: "#e74c3c",
@@ -124,6 +120,18 @@ const Perfil = () => {
     transition: 'color 0.3s',  
   };
 
+
+  const [hovere, setHovere] = useState(false);
+
+  const iconoDivierte = {
+    fontSize: hovere ? '40px' : '25px',  
+    transition: 'color 0.3s', 
+    color: hovere ? '#FFC107' : 'yellow',  
+  }  
+   
+
+
+
   return (
     <div  style={cardGeneral}>
         <div className="col-md-11" style ={ladoDerecho}> 
@@ -161,8 +169,12 @@ const Perfil = () => {
             <div className='row'  style ={{padding:"10px"}}> 
               <div className='col-4' style={informacionContainer} >
                 <button style = {{background:"none", textDecoration:"none", border: "none", display: "flex"}}>   
-                  <FontAwesomeIcon icon={faGrinTears} style={iconoDivierte} />
-                  <span style={publicacionTexto}>21</span>
+                  <FontAwesomeIcon icon={faGrinTears} style={iconoDivierte}
+                  onClick={() => {} /*  lógica clic */}
+                  onMouseEnter={() => setHovere(true)}
+                  onMouseLeave={() => setHovere(false)} />
+                  <span style={publicacionTexto}>17</span>
+                    
                 </button> 
               </div>
 
@@ -176,7 +188,7 @@ const Perfil = () => {
               <div className='col-6'  style={informacionContainer}>
                 <button style = {{background:"none", textDecoration:"none", border: "none", display: "flex"}}>   
                   <FontAwesomeIcon icon={faThumbsUp} style={iconoLike} />
-                  <span style={publicacionTexto}>10</span>
+                  <span style={publicacionTexto}>1</span>
                 </button> 
               </div>
                     

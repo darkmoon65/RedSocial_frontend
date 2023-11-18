@@ -6,13 +6,13 @@ const Perfil = () => {
   
 
   const cardGeneral = {
-    background: "#f4f4f9",
+   // background: "#f4f4f9",
     paddingLeft: "0px",
 
   }
 
   const ladoDerecho = {
-    backgroundColor: "#f4f4f9",
+   // backgroundColor: "#f4f4f9",
     padding: '20px',
     boxShadow: '0 0 rgba(0, 0, 0)',
 

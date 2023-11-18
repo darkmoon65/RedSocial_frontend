@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faHeart , } from '@fortawesome/free-solid-svg-icons';
 import Publish from './Publish';
 import Post from './Post';
+import Header from '../components/Header';
 
 
 const Perfil = () => { 
@@ -141,7 +142,7 @@ const Perfil = () => {
   
 
   const cardGeneral = {
-    padding:"45px",
+    // padding:"45px",
     background: "#f4f4f9",
 
   }
@@ -158,6 +159,7 @@ const Perfil = () => {
 
   return (
     <div  style={cardGeneral}>
+      <Header/>
       <div style={fondo}> 
             <img href="#" style={portada} src={process.env.PUBLIC_URL + '/imagenes/portada.jpg'} alt="portada" />
       </div>
@@ -259,8 +261,6 @@ const Perfil = () => {
           </div>
         </div>
       </div>
-
- 
 
     </div>
   );

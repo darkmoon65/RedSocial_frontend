@@ -1,4 +1,5 @@
 import Header from '../components/Header';
+import { Link } from "react-router-dom";
 
 const Home = () => {
     return (
@@ -13,7 +14,7 @@ const Home = () => {
                                 <ul>
                                     <li>Inicio</li>
                                     <li>Mensajes</li>
-                                    <li>Perfil</li>
+                                    <li><Link to="/perfil">Perfil</Link></li>
                                     <li>Grupos</li>
                                     <li>Amigos</li>
                                 </ul>

@@ -1,7 +1,7 @@
 import Header from '../components/Header';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faHome, faMessage, faPaperPlane, faUserCircle, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faHome, faMessage, faUserCircle, faUsers } from '@fortawesome/free-solid-svg-icons';
 import Post from '../components/Post';
 import Publish from '../components/Publish';
 

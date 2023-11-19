@@ -1,7 +1,7 @@
  import React , { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
- import { faBrain, faClapperboard, faHeart, faImage, faTimes } from '@fortawesome/free-solid-svg-icons';
+ import { faImage, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 
   //* -------  BOTON PUBLICAR */
@@ -31,7 +31,6 @@ const handlePublicarClick = () => {
 
   const handleEliminarImagen = () => {
     setImagenSeleccionada(null);
-    // Crear un nuevo objeto para actualizar las propiedades específicas
     iconoEliminarImagen.display = 'none';
   };
 

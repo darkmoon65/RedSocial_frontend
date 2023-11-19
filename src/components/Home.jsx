@@ -1,5 +1,5 @@
 import Header from '../components/Header';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHome, faMessage, faUserCircle, faUsers } from '@fortawesome/free-solid-svg-icons';
 import Post from '../components/Post';
@@ -11,6 +11,8 @@ const iconoShare = {
     fontSize: "15px",
     textDecoration: "none",
     decoration: "none",
+    marginRight: '10px',
+    marginBottom: '2px', 
   }
 
 const iconoContainer = {
@@ -19,6 +21,11 @@ const iconoContainer = {
     textDecoration: "none",
     decoration: "none",
     underline: "none",
+    listStyle: 'none',
+    margin: '10px 0',
+    padding: '10px',
+    borderRadius: '8px',
+    alignItems: 'center',
   }
 
 const Home = () => {
@@ -31,39 +38,50 @@ const Home = () => {
                         <div className='card' style={{height: '80vh'}}>
                             <div className='card-body'>
                                 Cesar Santillana
-                                <ul style={{ textDecoration: 'none', underline: 'none',}} > 
-                                  
-                                    <li style={iconoContainer}>
-                                        <FontAwesomeIcon icon={faHome} style={iconoShare}></FontAwesomeIcon>
-                                        <Link to="/">Inicio</Link>
-                                    </li>              
-
-                                    <li style={iconoContainer}>
-                                        <FontAwesomeIcon icon={faComment} style={iconoShare}></FontAwesomeIcon>
-                                        <Link to="/mensajes">Mensajes</Link>
-                                    </li>              
-
-                                    <li style={iconoContainer}>
-                                        <FontAwesomeIcon icon={faUserCircle} style={iconoShare}></FontAwesomeIcon>
-                                        <Link to="/perfil">Perfil</Link>
+                                <ul className="nav flex-column" style={{ padding: '0' }}>
+                                    <li style={iconoContainer} className="nav-item">
+                                        <FontAwesomeIcon icon={faHome} style={iconoShare} />
+                                        <Link to="/" className="nav-link d-flex align-items-center">
+                                        Inicio
+                                        </Link>
                                     </li>
 
-                                    <li style={iconoContainer}>
-                                        <FontAwesomeIcon icon={faMessage} style={iconoShare}></FontAwesomeIcon>
-                                        <Link to="/perfil">Grupos</Link>
+                                    <li style={iconoContainer} className="nav-item">
+                                        <FontAwesomeIcon icon={faComment} style={iconoShare} />
+                                        <NavLink to="/mensajes" className="nav-link d-flex align-items-center" 
+                                        style = {{  textDecoration: 'none',
+                                        display: 'flex', alignItems: 'center',}}>
+                                        Mensajes
+                                        </NavLink>
                                     </li>
 
-                                    <li style={iconoContainer}>
-                                        <FontAwesomeIcon icon={faUsers} style={iconoShare}/>
-                                        <Link to="/perfil">Amigos</Link>
+                                    <li style={iconoContainer} className="nav-item">
+                                        <FontAwesomeIcon icon={faUserCircle} style={iconoShare} />
+                                        <Link to="/perfil" className="nav-link">
+                                        Perfil
+                                        </Link>
+                                    </li>
+
+                                    <li style={iconoContainer} className="nav-item">
+                                        <FontAwesomeIcon icon={faMessage} style={iconoShare} />
+                                        <Link to="/grupos" className="nav-link">
+                                        Grupos
+                                        </Link>
+                                    </li>
+
+                                    <li style={iconoContainer} className="nav-item">
+                                        <FontAwesomeIcon icon={faUsers} style={iconoShare} />
+                                        <Link to="/amigos" className="nav-link">
+                                        Amigos
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div className='col-6'>
-                        <div className='card p-4 m-3'>
-                            <div className='card-body'>
+                        <div className='card p-4 m-3' >
+                            <div className='card-body' >
                                 <Publish></Publish>
                             </div>
                         </div>

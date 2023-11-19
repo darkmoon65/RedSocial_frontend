@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCamera} from '@fortawesome/free-solid-svg-icons';
+import { faCamera, faImage, faPhotoFilm, faVideoCamera} from '@fortawesome/free-solid-svg-icons';
+import ModalPublish from '../components/ModalPublish';
 
 const Perfil = () => { 
   
@@ -8,14 +9,14 @@ const Perfil = () => {
   const cardGeneral = {
    // background: "#f4f4f9",
     paddingLeft: "0px",
+    width: "100%"
 
   }
 
   const ladoDerecho = {
-   // backgroundColor: "#f4f4f9",
-    padding: '20px',
+   // backgroundColor: "#f4f4f9" si modifico esto se mueve todo el nacho del publish ,
     boxShadow: '0 0 rgba(0, 0, 0)',
-
+    width: "104%"
   }
 
 
@@ -24,6 +25,7 @@ const Perfil = () => {
     padding: '20px',
     borderRadius:"5px",
     boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+    width: "100%"
   }
   
   
@@ -43,7 +45,6 @@ const Perfil = () => {
 
 
   const iconoCamara = {
-    width:"100%",
     color: "green",
     fontSize: "25px",
   }
@@ -58,11 +59,12 @@ const Perfil = () => {
               <img href="#" style={iconoPerfil} src={process.env.PUBLIC_URL + '/imagenes/mandala.jpg'} alt="perfil" />
             </div>
                          
-            <div className='col-8'  style={buscadorContainer}>
-              <input  className='form-control' style={{width : '100%'}} type="text" placeholder="Qué estás pensando?" />  
+            <div className='col-11'  style={buscadorContainer}>
+              <ModalPublish></ModalPublish>
+ 
               <div className='col-1' >
                 <button style = {{textDecoration:"none", background: "none", border: "none", paddingLeft: "13px"}}>
-                  <FontAwesomeIcon icon={faCamera} style={iconoCamara} /> 
+                  <FontAwesomeIcon icon={faImage} style={iconoCamara} /> 
                 </button> 
               </div>    
             </div> 

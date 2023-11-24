@@ -1,14 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../index.css'; 
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { socket } from '../socket';
+import { useState } from 'react';
 import Header from './Header';
 
 const Chats = () => {
- 
+    const [value, setValue] = useState('');
+    const [mensajes, setMensajes] = useState([]);
+    const [mensajesRecibidos, setMensajesRecibidos] = useState([]);
+
+    function onSubmit(event) {  
+        socket.emit("chat", value); 
+
+        setMensajes([...mensajes, value]);
+    }
+    function changeValue(event){
+        setValue(event.target.value);
+    }
+    useEffect( ()=> {
+        socket.on('chat', function(msg) {
+            console.log(msg);
+            setMensajesRecibidos([...mensajesRecibidos, msg]);
+        });
+    }, [mensajesRecibidos])
+
+
     return (
      
       <div className="maincontainer">
@@ -268,24 +288,6 @@ const Chats = () => {
                 </div>
             </div>
 
-            <div class = "row">
-                <div class=" col-1"> {/** imagen*/}
-                    <div class="media w-50 mb-3 " ><img src={process.env.PUBLIC_URL + '/imagenes/mandala.jpg'}  alt="user" width="50" class="rounded-circle" />
-                    </div>
-                </div>
-
-                <div class=" col-5"> {/** texto*/}
-                    <div class="media-body ml-3">
-                    <div class="rounded py-2 px-3 mb-2"  style ={{ backgroundColor:"white" , boxShadow:"0 0 10px rgba(0,0,0, 0.1)"}}>
-                        <p class="text-small mb-0 text-muted">Test which is  new   new approach all solutions approach all solutions a new approach all solutions</p>
-                    </div>
-                    <p class="small text-muted">12:00 PM | Nov 18</p>
-                    </div>
-                </div>
-            </div>
-            
-            
-
             <div class = "row media w-50 mb-3 align-self-end">
                 <div class=" col-10"> {/** texto*/}
                     <div class="media-body">
@@ -302,18 +304,61 @@ const Chats = () => {
                 </div>
             </div>
 
+            {
+                mensajesRecibidos.map( (mensaje)=> {
+                    return (
+                        <div class = "row">
+                            <div class=" col-1"> {/** imagen*/}
+                                <div class="media w-50 mb-3 " ><img src={process.env.PUBLIC_URL + '/imagenes/mandala.jpg'}  alt="user" width="50" class="rounded-circle" />
+                                </div>
+                            </div>
+
+                            <div class=" col-5"> {/** texto*/}
+                                <div class="media-body ml-3">
+                                <div class="rounded py-2 px-3 mb-2"  style ={{ backgroundColor:"white" , boxShadow:"0 0 10px rgba(0,0,0, 0.1)"}}>
+                                    <p class="text-small mb-0 text-muted">{mensajesRecibidos}</p>
+                                </div>
+                                <p class="small text-muted">12:00 PM | Nov 18</p>
+                                </div>
+                            </div>
+                        </div>
+                    )})
+            }
+            {
+                mensajes.map( (mensaje)=> {
+                    return (
+                        <div class = "row media w-50 mb-3 align-self-end">
+                            <div class=" col-10"> {/** texto*/}
+                                <div class="media-body">
+                                <div class="bg-primary rounded py-2 px-3 mb-2 text-right">
+                                    <p class="text-small mb-0 text-white">{mensaje}</p>
+                                </div>
+                                <p class="small text-muted">12:00 PM | Nov 18</p>
+                                </div>
+                            </div>
+            
+                            <div class=" col-1"> {/** imagen*/}
+                                <div class="media w-50 mb-3 " ><img src={process.env.PUBLIC_URL + '/imagenes/mandala.jpg'}  alt="user" width="50" class="rounded-circle" />
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })
+            }
+
             </div>
 
         
             <form action="#" class="bg-light">
               <div class="input-group">
-                <input type="text" placeholder="Escribe un mensaje" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light" />
+                <input onChange={changeValue} type="text" placeholder="Escribe un mensaje" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light" />
                 <div class="input-group-append">
                   <button id="button-addon2" type="button" class="btn btn-link">
                     <FontAwesomeIcon icon={faCamera} style= {{padding:"6.5px"}} ></FontAwesomeIcon> 
-                 
+                
+                  </button>
+                  <button class="btn btn-link" onClick={()=> onSubmit()}>
                     <FontAwesomeIcon icon={faPaperPlane} style= {{padding:"6.5px"}} ></FontAwesomeIcon> 
-
                   </button>
                 </div>
               </div>

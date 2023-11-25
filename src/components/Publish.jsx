@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCamera, faImage, faPhotoFilm, faVideoCamera} from '@fortawesome/free-solid-svg-icons';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
 import ModalPublish from '../components/ModalPublish';
 
 const Perfil = () => { 

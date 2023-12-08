@@ -1,6 +1,7 @@
 import React, {useState}from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGrinTears, faHeart, faThumbsUp, faComment, faShare, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import Reacciones from './Reacciones';
 
 const Perfil = () => { 
   
@@ -166,45 +167,7 @@ const Perfil = () => {
 
             {/*REACCIONES */}
             <div className='row'  style ={{padding:"10px"}}> 
-              <div className='col-4' style={informacionContainer} >
-                <button style = {{background:"none", textDecoration:"none", border: "none", display: "flex"}}>   
-                  <FontAwesomeIcon icon={faGrinTears} style={iconoDivierte}
-                  onClick={() => {} /*  lógica clic */}
-                  onMouseEnter={() => setHovere(true)}
-                  onMouseLeave={() => setHovere(false)} />
-                  <span style={publicacionTexto}>17</span>
-                    
-                </button> 
-              </div>
-
-              <div className='col-6'  style={informacionContainer}>
-                <button style = {{background:"none", textDecoration:"none", border: "none", display: "flex"}}>   
-                  <FontAwesomeIcon icon={faHeart} style={iconoEncanta} />
-                  <span style={publicacionTexto}>15</span>
-                </button> 
-              </div>
-              
-              <div className='col-6'  style={informacionContainer}>
-                <button style = {{background:"none", textDecoration:"none", border: "none", display: "flex"}}>   
-                  <FontAwesomeIcon icon={faThumbsUp} style={iconoLike} />
-                  <span style={publicacionTexto}>1</span>
-                </button> 
-              </div>
-                    
-              <div className='col-6'  style={informacionContainer}>
-              <button style = {{background:"none", textDecoration:"none", border: "none", display: "flex"}}>   
-                <FontAwesomeIcon icon={faComment} style={iconoComentar} />
-                <span style={publicacionTexto}>1</span>
-                </button>
-              </div>
-
-              <div className='col-6'  style={informacionContainer}>
-                <button style = {{background:"none", textDecoration:"none", border: "none", display: "flex"}}>   
-                  <FontAwesomeIcon icon={faShare} style={iconoShare} />
-                  <span style={publicacionTexto}>Compartir</span>
-                </button> 
-              </div>
-              
+              <Reacciones ></Reacciones>
             </div>
 
             {/* ESCRIBE */}

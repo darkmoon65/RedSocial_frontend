@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCamera, faImage, faPhotoFilm, faVideoCamera} from '@fortawesome/free-solid-svg-icons';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
 import ModalPublish from '../components/ModalPublish';
 
 const Perfil = () => { 
@@ -63,7 +63,7 @@ const Perfil = () => {
               <ModalPublish></ModalPublish>
  
               <div className='col-1' >
-                <button style = {{textDecoration:"none", background: "none", border: "none", paddingLeft: "13px"}}>
+                <button data-bs-toggle="modal" data-bs-target="#dinamycBackdrop"  style = {{textDecoration:"none", background: "none", border: "none", paddingLeft: "13px"}}>
                   <FontAwesomeIcon icon={faImage} style={iconoCamara} /> 
                 </button> 
               </div>    

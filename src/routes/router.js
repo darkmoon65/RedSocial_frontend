@@ -7,21 +7,23 @@ import LoginWithGoogle from '../components/LoginGoogle';
 import Mensajes from '../components/Mensajes';
 import Grupos from '../components/Grupos';
 import Agregar from '../components/Agregar';
-
+import ProtectedRoute from '../components/ProtectRoute';
 
 function Router() {
 
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Home />} />
                 <Route path="/login" element={< Login />} />
                 <Route path="/loginGoogle" element={< LoginWithGoogle />} />
                 <Route path="/register" element={<Registro />} />
-                <Route path="/perfil" element={< Perfil />} />
-                <Route path="/Mensajes" element={< Mensajes />} />
-                <Route path="/Grupos" element={< Grupos />} />
-                <Route path="/Agregar" element={< Agregar />} />
+
+                <Route exact path="/" element={<ProtectedRoute > <Home /> </ProtectedRoute>} />
+                <Route path="/perfil" element={<ProtectedRoute > <Perfil /> </ProtectedRoute>} />
+                <Route path="/mensajes" element={<ProtectedRoute > <Mensajes /> </ProtectedRoute>} />
+                <Route path="/grupos" element={<ProtectedRoute > <Grupos /> </ProtectedRoute>} />
+                <Route path="/agregar"  element={<ProtectedRoute > <Agregar /> </ProtectedRoute>} />
+
             </Routes>
         </BrowserRouter>
     )

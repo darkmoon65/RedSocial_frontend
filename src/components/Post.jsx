@@ -142,13 +142,13 @@ const Perfil = (props) => {
             {/* NOMBRE USUARIO */} 
             <div className='row'   > 
               <div className='col-md-1 p-0' style={textoContainer}>
-                <img href="#"   src={process.env.PUBLIC_URL + '/imagenes/mandala.jpg'} alt="fotoperfil"  style={fotoPerfil} />  
+                <img href="#"   src={process.env.PUBLIC_URL + '/imagenes/generic_user.jpg'} alt="fotoperfil"  style={fotoPerfil} />  
               </div>
               
               <div className='col-md-4 p-0'>
-                <span style={nombreUsuario}>{props.data.usuario.nombre}</span> 
+                <span style={nombreUsuario}>{props.data?.usuario?.nombre}</span> 
                 <div  style={amigosTexto}>
-                  <span >{props.data.fecha}</span>
+                  <span >{props.data?.fecha}</span>
                 </div> 
               </div>    
             </div>  
@@ -156,18 +156,18 @@ const Perfil = (props) => {
 
             {/**COMENTARIO PUBLICACI´ON*/}  
             <div  >
-                <span style={publicacionTexto}>{props.data.descripcion}</span>
+                <span style={publicacionTexto}>{props.data?.descripcion}</span>
               </div>
 
             {/**FOTO PUBLICACI´ON*/}  
             <div>
               {
-                props.file.tipo == 0 ?  (
-                  <img href="#" style={imagenPost} src={'http://localhost:8000/' + props.file.media} alt="portada" />
+                props.file?.tipo == 0 ?  (
+                  <img href="#" style={imagenPost} src={'http://localhost:8000/' + props.file?.media} alt="portada" />
                 ):
                 (
                   <video controls autoplay name="media">
-                    <source src={'http://localhost:8000/' + props.file.media} type="video/mp4" />
+                    <source src={'http://localhost:8000/' + props.file?.media} type="video/mp4" />
                   </video>
                 
                 )

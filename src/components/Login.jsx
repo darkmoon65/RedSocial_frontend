@@ -24,6 +24,7 @@ const Login = () => {
         return
       }
       var token = await rpta.json();
+      localStorage.setItem('token', token.access);
       navigate('/');
       
     }catch(err){

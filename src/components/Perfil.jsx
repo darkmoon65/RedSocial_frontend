@@ -4,11 +4,29 @@ import { faHome, faHeart , } from '@fortawesome/free-solid-svg-icons';
 import Publish from './Publish';
 import Post from './Post';
 import Header from '../components/Header';
-
+import { useEffect, useState } from 'react';
 
 const Perfil = () => { 
  
+  const [posts, setPosts] = useState([]);
+  const [postsFile, setPostsFile] = useState([]);
 
+  useEffect( () => {
+      async function getData() {
+          const rpta = await fetch('http://localhost:8000/publicacion/');
+          const dataPublicaciones = await rpta.json();
+
+          const rptaFile = await fetch('http://localhost:8000/publicacionFile/');
+          const dataFile = await rptaFile.json();
+
+
+          setPosts(dataPublicaciones)
+          setPostsFile(dataFile)
+
+          console.log(dataFile)
+      }
+      getData()
+  }, [])
   const portada = {
     width : "100%",
     height : "100%",
@@ -257,7 +275,13 @@ const Perfil = () => {
           </div> 
           <div className='col-md-6'>
             <Publish></Publish>  
-            <Post></Post>   
+            {
+            (postsFile && posts) ? posts?.map( (e, index) => {
+              return (
+                <Post data={e} file={postsFile[index]}></Post>   
+              )
+            }) : null
+            }
           </div>
         </div>
       </div>

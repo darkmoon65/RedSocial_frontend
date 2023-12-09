@@ -6,6 +6,21 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  const showToast = (message, type) => {
+    const toastElement = document.getElementById('customToast');
+    toastElement.innerText = message;
+  
+    toastElement.style.color = '#fff';   
+    toastElement.className = `toast show bg-${type} text-white`; 
+    toastElement.style.position = 'fixed';
+    toastElement.style.top = '10px';
+    toastElement.style.right = '10px';
+  
+    setTimeout(() => {
+      toastElement.className = 'toast hide';
+    }, 3000);
+  };
+
   const handleLogin = async () => {
     console.log('Email:', email);
     console.log('Password:', password);
@@ -20,11 +35,13 @@ const Login = () => {
         body: JSON.stringify ({"correo": email, "contrasena": password})
       });
       if(!rpta.ok){
-        alert("Usuario o contraseña no validos");
+        showToast('Ocurrió un error al iniciar sesión. Por favor, inténtelo de nuevo.', 'danger');
         return
       }
-      var token = await rpta.json();
-      localStorage.setItem('token', token.access);
+      showToast('Inicio de sesión exitoso!', 'success');
+      var data = await rpta.json();
+      localStorage.setItem('token', data.access);
+      localStorage.setItem('user', data.email);
       navigate('/');
       
     }catch(err){
@@ -134,6 +151,7 @@ const Login = () => {
             <button style = {botonRegistro}  type="button" onClick={handleLogin}>
                 Registrarse con Google
             </button>
+            <div id="customToast" className="toast hide"></div>
         </div>
     </div>
   );

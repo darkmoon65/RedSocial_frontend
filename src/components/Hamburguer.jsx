@@ -27,31 +27,57 @@ const iconoContainer = {
 };
  
 
-const Hamburguer = () => {
+const Hamburguer = ({userData}) => {
+  console.log(userData)
   return (
     <div className="">
       <div className="card" style={{ height: "80vh"}}>
         <div className="card-body">
           <div style={{ marginBottom: "20px", textAlign: "center" }}>
-            <div style={{
-                width: "150px",
-                height: "150px",
-                backgroundColor: "#3498db",
-                borderRadius: "50%",
-                marginBottom:"15px",
-                textAlign: "center",
-                justifyContent:"center"
-            }}>
-          <img href="#"   src={process.env.PUBLIC_URL + '/imagenes/mandala.jpg'} alt="fotoperfil"  style={{
-                width: "150px",
-                height: "150px",
-                backgroundColor: "#3498db",
-                borderRadius: "50%",
-                marginBottom:"15px",
-                textAlign: "center",
-                justifyContent:"center"}} />  
-            </div>
-            Cesar Santillana
+
+              {
+                userData.imagen_perfil ? (
+                    <div style={{
+                      width: "150px",
+                      height: "150px",
+                      backgroundColor: "#3498db",
+                      borderRadius: "50%",
+                      marginBottom:"15px",
+                      textAlign: "center",
+                      justifyContent:"center"
+                  }}>
+                      <img href="#"   src={process.env.PUBLIC_URL + '/imagenes/mandala.jpg'} alt="fotoperfil"  style={{
+                        width: "150px",
+                        height: "150px",
+                        backgroundColor: "#3498db",
+                        borderRadius: "50%",
+                        marginBottom:"15px",
+                        textAlign: "center",
+                        justifyContent:"center"}} />  
+                  </div>
+                ) : (
+                  <div style={{
+                    width: "150px",
+                    height: "150px",
+                    backgroundColor: "#3498db",
+                    borderRadius: "50%",
+                    marginBottom:"15px",
+                    textAlign: "center",
+                    justifyContent:"center"
+                }}>
+                    <img href="#"   src={process.env.PUBLIC_URL + '/imagenes/generic_user.jpg'} alt="fotoperfil"  style={{
+                      width: "150px",
+                      height: "150px",
+                      backgroundColor: "#3498db",
+                      borderRadius: "50%",
+                      marginBottom:"15px",
+                      textAlign: "center",
+                      justifyContent:"center"}} />  
+                  </div>
+                )
+              }
+
+            {userData.nombre} {userData.apellidos}
           </div>
           <ul className="nav flex-column" style={{ padding: "0" }}>
             <li style={iconoContainer} className="nav-item">

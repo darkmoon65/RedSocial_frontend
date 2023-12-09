@@ -10,7 +10,8 @@ const Perfil = () => {
  
   const [posts, setPosts] = useState([]);
   const [postsFile, setPostsFile] = useState([]);
-
+  const [userData, setUserData] = useState();
+  
   useEffect( () => {
       async function getData() {
           const rpta = await fetch('http://localhost:8000/publicacion/');
@@ -18,7 +19,19 @@ const Perfil = () => {
 
           const rptaFile = await fetch('http://localhost:8000/publicacionFile/');
           const dataFile = await rptaFile.json();
-
+        
+          const userData = await fetch('http://localhost:8000/usuario/', {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify ({"correo": localStorage.getItem('user')})
+          });
+          if(userData.ok){
+              const user = await userData.json();
+              console.log(user);
+              setUserData(user.user);
+          }
 
           setPosts(dataPublicaciones)
           setPostsFile(dataFile)
@@ -184,9 +197,15 @@ const Perfil = () => {
 
       <div  style={fondo2}> 
         <div className='col-6 justify-content-start ' style={textoContainer}>
-          <img href="#"   src={process.env.PUBLIC_URL + '/imagenes/mandala.jpg'} alt="fotoperfil"  style={fotoPerfil} />  
+        {
+                userData?.imagen_perfil ? (
+            <img href="#"   src={'http://localhost:8000/'+ userData.imagen_perfil} alt="fotoperfil"  style={fotoPerfil} /> 
+            )
+          : (<img href="#"   src={process.env.PUBLIC_URL + '/imagenes/generic_user.jpg'} alt="fotoperfil"  style={fotoPerfil} /> )
+                
+        } 
           <div className='col-md-4 p-0'>
-                <span style={nombreUsuario}>Smith Jems</span> 
+                <span style={nombreUsuario}>{userData?.nombre} {userData?.apellidos}</span> 
                 <div  style={amigosTexto}>
                   <span >170 Amigos</span>
                 </div> 
@@ -274,11 +293,11 @@ const Perfil = () => {
           </div>   
           </div> 
           <div className='col-md-6'>
-            <Publish></Publish>  
+            <Publish userData = {userData}></Publish>  
             {
             (postsFile && posts) ? posts?.map( (e, index) => {
               return (
-                <Post data={e} file={postsFile[index]}></Post>   
+                <Post data={e} file={postsFile[index]} userData={userData}></Post>   
               )
             }) : null
             }

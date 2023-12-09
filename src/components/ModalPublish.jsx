@@ -1,4 +1,4 @@
- import React , { useState } from 'react';
+ import React , { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
  import { faImage, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -6,16 +6,79 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
   //* -------  BOTON PUBLICAR */
 
-const Modal = () => { 
+const Modal = ({getData}) => { 
   const [contenidoInput, setContenidoInput] = useState('');
   const [imagenSeleccionada, setImagenSeleccionada] = useState(null);
+  const [imagenSeleccionadaImg, setImagenSeleccionadaImg] = useState();
+  const [userData, setUserData] = useState({});
 
   const handleInputChange = (event) => {
     setContenidoInput(event.target.value);
 };
 
-const handlePublicarClick = () => {
+useEffect(()=> {
+    const datosUser = async ()=> {
+        const userData = await fetch('http://localhost:8000/usuario/', {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify ({"correo": localStorage.getItem('user')})
+        });
+        if(userData.ok){
+            const user = await userData.json();
+            console.log(user);
+            setUserData(user.user);
+        }
+    }
+    datosUser();
+}, [])
+
+const showToast = (message, type) => {
+    const toastElement = document.getElementById('customToast');
+    toastElement.innerText = message;
+  
+    toastElement.style.color = '#fff';   
+    toastElement.className = `toast show bg-${type} text-white`; 
+    toastElement.style.position = 'fixed';
+    toastElement.style.top = '10px';
+    toastElement.style.right = '10px';
+    toastElement.style.zIndex = '9999';
+    
+    setTimeout(() => {
+      toastElement.className = 'toast hide';
+    }, 3000);
+  };
+const handlePublicarClick = async () => {
     console.log('Publicar:', contenidoInput);
+
+    const rpta = await fetch('http://localhost:8000/publicacion/', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify ({"usuario": userData.id, "fecha": new Date(),  "descripcion":  contenidoInput})
+    });
+    if(rpta.ok){
+        const pub = await rpta.json();
+        console.log(pub);
+        //setUserData(user.user);
+        
+        const formData = new FormData();
+        formData.append('media', imagenSeleccionada); 
+        formData.append('publicacion', pub.id); 
+        formData.append('tipo', 0); 
+
+        const filePta = await fetch('http://localhost:8000/publicacionFile/', {
+            method: "POST",
+            body: formData
+        });
+        if(filePta.ok){
+            showToast('Se creó la publicación', 'success');
+            getData();
+        }
+    }
+
   };
 
 
@@ -25,7 +88,8 @@ const handlePublicarClick = () => {
  const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     const imageUrl = URL.createObjectURL(selectedFile);
-    setImagenSeleccionada(imageUrl);
+    setImagenSeleccionada(selectedFile);
+    setImagenSeleccionadaImg(imageUrl);
     console.log('Archivo seleccionado:', selectedFile);
   };
 
@@ -106,9 +170,9 @@ const handlePublicarClick = () => {
                                 />
                         </div>
                         
-                        {imagenSeleccionada && (
+                        {imagenSeleccionadaImg && (
                             <div style={{ position: 'relative', maxWidth: '100%', marginTop: '10px' }}>
-                             <img src={imagenSeleccionada} alt='Imagen seleccionada' style={{ maxWidth: '100%' }} />
+                             <img src={imagenSeleccionadaImg} alt='Imagen seleccionada' style={{ maxWidth: '100%' }} />
                              <FontAwesomeIcon icon={faTimes} style={iconoEliminarImagen} onClick={handleEliminarImagen} />
                             </div>
                         )}
@@ -126,6 +190,7 @@ const handlePublicarClick = () => {
                 </div>
             </div>
             </div>
+            <div id="customToast" className="toast hide"></div>
         </div>
 
 );

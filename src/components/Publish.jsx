@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import ModalPublish from '../components/ModalPublish';
 
-const Perfil = () => { 
+const Perfil = ({userData, getData}) => { 
   
 
   const cardGeneral = {
@@ -56,11 +56,18 @@ const Perfil = () => {
 
           <div className='row'  style ={quePiensas}>
             <div className='col-1' >
-              <img href="#" style={iconoPerfil} src={process.env.PUBLIC_URL + '/imagenes/mandala.jpg'} alt="perfil" />
+              
+            {
+                userData?.imagen_perfil ? (
+                <img href="#"   src={'http://localhost:8000/'+ userData.imagen_perfil} alt="fotoperfil"  style={iconoPerfil} /> 
+                )
+              : (<img href="#"   src={process.env.PUBLIC_URL + '/imagenes/generic_user.jpg'} alt="fotoperfil"  style={iconoPerfil} /> )
+                    
+            } 
             </div>
                          
             <div className='col-11'  style={buscadorContainer}>
-              <ModalPublish></ModalPublish>
+              <ModalPublish getData={getData}></ModalPublish>
  
               <div className='col-1' >
                 <button data-bs-toggle="modal" data-bs-target="#dinamycBackdrop"  style = {{textDecoration:"none", background: "none", border: "none", paddingLeft: "13px"}}>

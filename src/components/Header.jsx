@@ -1,9 +1,10 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 
 const Header = () => { 
+  const navigate = useNavigate();
   const logo = {
     width : "200px",
     margin: "10px",
@@ -38,7 +39,11 @@ const Header = () => {
   const cerrarSesionTexto = {
     marginLeft: "1px",  
   };
- 
+  
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  }
 
   return (
     <div >
@@ -58,7 +63,7 @@ const Header = () => {
           <FontAwesomeIcon icon={faBell} style={endPart} />  
           <div style={cerrarSesionContainer}>
             <FontAwesomeIcon icon={faSignOutAlt} style={endPart} />
-            <Link to="/login" style={{textDecoration: 'none', color: 'white'}}><span style={cerrarSesionTexto}>Cerrar Sesión</span></Link>
+            <button onClick={handleLogout} style={{textDecoration: 'none', color: 'white', background: 'none', border: 'none'}}><span style={cerrarSesionTexto}>Cerrar Sesión</span></button>
           </div>
         </div>
       </div>

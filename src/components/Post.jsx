@@ -1,10 +1,21 @@
-import React, {useState}from 'react';
+import React, {useEffect, useState}from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGrinTears, faHeart, faThumbsUp, faComment, faShare, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import Reacciones from './Reacciones';
 
 const Perfil = (props) => { 
-  
+  const [comentarios, setComentarios] = useState([]);
+  const [personalComment, setPersonalComment] = useState();
+
+  useEffect(()=> {
+    const datos = async ()=> {
+      const rpta = await fetch('http://localhost:8000/publicacionComentario/');
+      const coment = await rpta.json();
+      setComentarios(coment);
+      console.log(coment)
+    }
+    datos();
+  },[])
 
   const cardGeneral = {
       paddingLeft:"0px"
@@ -130,7 +141,31 @@ const Perfil = (props) => {
   }  
    
 
+  const handleComment = async ( ) => {
+    const rpta = await fetch('http://localhost:8000/publicacionComentario/', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      }, 
+      body: JSON.stringify ({"usuario": props.userData.id, "fecha": new Date(),  "descripcion":  personalComment, 
+                              "publicacion": props.data?.id})
+    });
 
+    if(rpta.ok){
+      const datos = async ()=> {
+        const rpta = await fetch('http://localhost:8000/publicacionComentario/');
+        const coment = await rpta.json();
+        setComentarios(coment);
+        console.log(coment)
+      }
+      datos();
+      setPersonalComment('');
+    }
+
+  }
+  const handleChangeComment = (e) => {
+    setPersonalComment(e.target.value)
+  }
 
   return (
     <div  style={cardGeneral}>
@@ -146,7 +181,7 @@ const Perfil = (props) => {
               </div>
               
               <div className='col-md-4 p-0'>
-                <span style={nombreUsuario}>{props.data?.usuario?.nombre}</span> 
+                <span style={nombreUsuario}>{props.userData?.nombre} {props.userData?.apellidos}</span> 
                 <div  style={amigosTexto}>
                   <span >{props.data?.fecha}</span>
                 </div> 
@@ -184,18 +219,34 @@ const Perfil = (props) => {
             {/* ESCRIBE */}
 
             <div className='col-1' >
-              <img href="#" style={iconoPerfil} src={process.env.PUBLIC_URL + '/imagenes/mandala.jpg'} alt="perfil" />
+              
+            {
+                props.userData?.imagen_perfil ? (
+                <img href="#"   src={'http://localhost:8000/'+ props.userData.imagen_perfil} alt="fotoperfil"  style={iconoPerfil} /> 
+                )
+              : (<img href="#"   src={process.env.PUBLIC_URL + '/imagenes/generic_user.jpg'} alt="fotoperfil"  style={iconoPerfil} /> )
+                    
+            } 
             </div>
                          
             <div className='col-8'  style={buscadorContainer}>
-              <input  className='form-control' style={{width : '100%'}} type="text" placeholder="Escribe un comentario" />      
-              <button style = {{background:"none", textDecoration:"none", border: "none"}}>
+              <input  className='form-control' style={{width : '100%'}} type="text" placeholder="Escribe un comentario" onChange={handleChangeComment} />      
+              <button onClick={handleComment} style = {{background:"none", textDecoration:"none", border: "none"}}>
                 <FontAwesomeIcon icon={faPaperPlane} style={iconoSend} 
-                    onClick={() => {} /*  lógica clic */}
                     onMouseEnter={() => setHovered(true)}
                     onMouseLeave={() => setHovered(false)}/>
               </button>
              
+            </div>
+            <div>
+              <h5>Comentarios</h5>
+              {
+                comentarios?.map( (c) => {
+                  if(c.publicacion === props.data.id){
+                    return(<div>{c.descripcion} </div>)
+                  }
+                })
+              }
             </div>
  
           </div>

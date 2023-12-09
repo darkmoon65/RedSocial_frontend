@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginWithGoogle from './LoginGoogle';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     console.log('Email:', email);
     console.log('Password:', password);
 
     try{
-      var rpta = await fetch("http://localhost:3200/auth/login", {
+      var rpta = await fetch("http://localhost:8000/login/", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -18,8 +19,12 @@ const Login = () => {
         },
         body: JSON.stringify ({"correo": email, "contrasena": password})
       });
+      if(!rpta.ok){
+        alert("Usuario o contraseña no validos");
+        return
+      }
       var token = await rpta.json();
-      console.log(token);
+      navigate('/');
       
     }catch(err){
       console.log(err)

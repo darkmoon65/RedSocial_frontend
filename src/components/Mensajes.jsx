@@ -14,7 +14,7 @@ const Chats = () => {
     const [mensajesRecibidos, setMensajesRecibidos] = useState([]);
 
     function onSubmit(event) {  
-        socket.emit("chat", value); 
+        // socket.emit("chat", value); 
 
         setMensajes([...mensajes, value]);
     }
@@ -22,10 +22,10 @@ const Chats = () => {
         setValue(event.target.value);
     }
     useEffect( ()=> {
-        socket.on('chat', function(msg) {
-            console.log(msg);
-            setMensajesRecibidos([...mensajesRecibidos, msg]);
-        });
+        // socket.on('chat', function(msg) {
+        //     console.log(msg);
+        //     setMensajesRecibidos([...mensajesRecibidos, msg]);
+        // });
     }, [mensajesRecibidos])
 
 

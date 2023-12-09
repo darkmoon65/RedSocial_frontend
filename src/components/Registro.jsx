@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, { useEffect , useState} from 'react';
+import { Link, useNavigate } from "react-router-dom";
 
 const botonRegistrarse = {
   background : " #00307a ",
@@ -50,6 +50,36 @@ const margen ={ marginBottom:"20px"  }
 
 
 const Registro = () => {
+  const [nombre, setNombre] = useState('');
+  const [apellidos, setapellidos] = useState('');
+  const [email, setEmail] = useState('');
+  const [genero, setGenero] = useState('');
+  const [passw, setPassw] = useState('');
+  const [fecha_nac, setFechaNac] = useState('');
+
+
+  const navigate = useNavigate();
+
+  const handleRegister = async ()=> {
+    const data = {nombre, apellidos, email, genero, passw, fecha_nac}
+    const rpta = await fetch('http://localhost:8000/usuarios/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    if(rpta.ok){
+      navigate('/login');
+    }else{
+      alert("Error al crear el usuario");
+    }
+
+
+  }
+
+
   return (
     <div style={general}>
       <div style={cardGeneral}>
@@ -62,41 +92,41 @@ const Registro = () => {
           <form style={formulario}>
             <div style={margen} >
               <label>Nombre</label>
-              <input  style={boxInput} type="text" />
+              <input  style={boxInput} type="text" onChange={(e) => setNombre(e.target.value)}/>
             </div>
             <div style={margen} >
-              <label>Apellido</label>
-              <input  style={boxInput} type="text" />
+              <label>apellidos</label>
+              <input  style={boxInput} type="text"  onChange={(e) => setapellidos(e.target.value)}/>
             </div>
             <div  style={margen}>
               <label>Email</label>
-              <input style={boxInput}  type="email" />
+              <input style={boxInput}  type="email" onChange={(e) => setEmail(e.target.value)}/>
             </div>
             <div style={margen}>
               <label>Contraseña</label>
-              <input style={boxInput}  type="password" />
+              <input style={boxInput}  type="password" onChange={(e) => setPassw(e.target.value)} />
             </div>
             <div style={margen}>
               <label>Confirmar Contraseña</label>
-              <input  style={boxInput} type="password" />
+              <input  style={boxInput} type="password"/>
             </div>
            <div style={card3}>
               <div style={margen}>
                   <label>Fecha de Nacimiento</label>
-                  <input  style={boxInput} type="date" />
+                  <input  style={boxInput} type="date" onChange={(e) => setFechaNac(e.target.value)}/>
               </div>
               <div style={margen}>
                 <label>Género</label>
-                  <select  style={boxInput} >
-                    <option value="male">Masculino</option>
-                    <option value="female">Femenino</option>
-                    <option value="other">Otro</option>
+                  <select  style={boxInput} onChange={(e) => setGenero(e.target.value)}>
+                    <option value="M" selected>Masculino</option>
+                    <option value="F">Femenino</option>
+                    <option value="O">Otro</option>
                   </select>
               </div>
            </div>
           </form>
           <div style={{textAlign: 'center', }}>
-            <Link style={botonRegistrarse} to="/login"> Registrarse </Link>
+            <button style={botonRegistrarse} onClick={handleRegister}> Registrarse </button>
 
           </div>
         </div>

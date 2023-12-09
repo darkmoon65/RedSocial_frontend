@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGrinTears, faHeart, faThumbsUp, faComment, faShare, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import Reacciones from './Reacciones';
 
-const Perfil = () => { 
+const Perfil = (props) => { 
   
 
   const cardGeneral = {
@@ -146,9 +146,9 @@ const Perfil = () => {
               </div>
               
               <div className='col-md-4 p-0'>
-                <span style={nombreUsuario}>Smith Jems</span> 
+                <span style={nombreUsuario}>{props.data.usuario.nombre}</span> 
                 <div  style={amigosTexto}>
-                  <span >17 Nov</span>
+                  <span >{props.data.fecha}</span>
                 </div> 
               </div>    
             </div>  
@@ -156,12 +156,23 @@ const Perfil = () => {
 
             {/**COMENTARIO PUBLICACI´ON*/}  
             <div  >
-                <span style={publicacionTexto}>Finalizando los parciales *-*</span>
+                <span style={publicacionTexto}>{props.data.descripcion}</span>
               </div>
 
             {/**FOTO PUBLICACI´ON*/}  
             <div>
-            <img href="#" style={imagenPost} src={process.env.PUBLIC_URL + '/imagenes/portada.jpg'} alt="portada" />
+              {
+                props.file.tipo == 0 ?  (
+                  <img href="#" style={imagenPost} src={'http://localhost:8000/' + props.file.media} alt="portada" />
+                ):
+                (
+                  <video controls autoplay name="media">
+                    <source src={'http://localhost:8000/' + props.file.media} type="video/mp4" />
+                  </video>
+                
+                )
+              }
+            
 
             </div> 
 

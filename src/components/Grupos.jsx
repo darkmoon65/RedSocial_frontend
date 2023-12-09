@@ -3,6 +3,8 @@ import Post from '../components/Post';
 import Publish from '../components/Publish';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faPlus } from '@fortawesome/free-solid-svg-icons';
+import Agregar from './Agregar';
+import { Link } from 'react-router-dom';
 
 
 const textoContainer = {
@@ -41,6 +43,21 @@ const nombreUsuario = {
     height:"20vh",  
     alignItems: "center", 
   }
+  const faPlusEstilos ={
+    background: "gray",
+    textAlign: "center",
+    justifyContent: "center",
+    textDecoration: "none",
+    color: "blue",
+    borderRadius: "5px",
+    border: "none",
+    padding: "15px",
+    display: "flex",
+    alignItems: "center",
+    margin: "0 auto"
+  }
+
+
 const Home = () => {
     
     return ( 
@@ -117,7 +134,7 @@ UNIRME
                                       
                                     <button className='bg-primary' style= {{textDecoration:'none', color: 'white', borderRadius: '5px', border:'none', padding: '10px', fontWeight:'bold'}}>
                                         
-                                    <FontAwesomeIcon icon={faPlus}  style= {{textDecoration:'none', color: 'white', borderRadius: '5px', border:'none', paddingRight: '15px', }} /> 
+                                    <FontAwesomeIcon icon={faPlus}  style= {{ paddingRight: '15px', }} /> 
 CREAR GRUPO
                                     </button>
 
@@ -156,11 +173,32 @@ CREAR GRUPO
                                     <img href="#"   src={process.env.PUBLIC_URL + '/imagenes/mandala.jpg'} alt="fotoperfil"  style={fotoPerfil} />  
                                 </div>
                                 
-                                <div className='col-10 p-2'>
+                                <div className='col-7 p-2'>
                                     <span style={nombreUsuario}>Juanita SMith</span> 
                                     <div  style={amigosTexto}>
                                     </div> 
-                                </div>    
+                                </div>  
+                                <div className='col-3 p-2'>
+                                <Link to="/agregar">
+                                    <FontAwesomeIcon
+                                    icon={faPlus}
+                                    style={{
+                                        background: "gray",
+                                        textAlign: "center",
+                                        justifyContent: "center",
+                                        textDecoration: "none",
+                                        color: "white",
+                                        borderRadius: "50%",
+                                        border: "none",
+                                        padding: "5px",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        cursor: "pointer",
+                                        margin: "0 auto"
+                                    }}
+                                    />
+                                </Link>
+                                </div>  
                             </div> 
                             {/* NOMBRE GRUPO */} 
                             <div className='row'   > 

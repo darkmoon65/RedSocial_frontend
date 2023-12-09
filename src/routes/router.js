@@ -5,6 +5,8 @@ import Perfil from '../components/Perfil';
 import Home from '../components/Home';
 import LoginWithGoogle from '../components/LoginGoogle';
 import Mensajes from '../components/Mensajes';
+import Grupos from '../components/Grupos';
+
 
 function Router() {
 
@@ -17,6 +19,7 @@ function Router() {
                 <Route path="/register" element={<Registro />} />
                 <Route path="/perfil" element={< Perfil />} />
                 <Route path="/Mensajes" element={< Mensajes />} />
+                <Route path="/Grupos" element={< Grupos />} />
             </Routes>
         </BrowserRouter>
     )

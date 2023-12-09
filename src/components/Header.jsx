@@ -14,7 +14,6 @@ const Header = () => {
   }
   const fondo = {
     background : " #00307a ",
-    width:"100%",
     height:"8vh",  
     alignItems: "center", 
   }
